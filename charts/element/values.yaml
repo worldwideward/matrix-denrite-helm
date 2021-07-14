@@ -1,17 +1,18 @@
-# Default values for matrix-dendrite.
+# Default values for element.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
+
+homeserver_url: dendrite.example.com
 
 replicaCount: 1
 
 image:
-  repository: ghcr.io/worldwideward/matrix-dendrite
+  repository: vectorim/element-web
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "latest"
+  tag: "v1.7.32"
 
-imagePullSecrets: {}
-
+imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
@@ -39,7 +40,7 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 8008
+  port: 80
 
 ingress:
   enabled: false
@@ -47,13 +48,13 @@ ingress:
   #  kubernetes.io/ingress.class: nginx
   #  kubernetes.io/tls-acme: "true"
   #hosts:
-  #- host: dendrite.example.com
-  #  paths: 
-  #  - path: "/"
-  #tls: 
-  # - secretName: dendrite-tls
-  #  hosts:
-  #  - dendrite.example.com
+  #  - host: chat.example.com
+  #    paths: 
+  #    - path: "/"
+  tls: {}
+  # - secretName: element-tls
+  # hosts:
+  # - chat.example.com
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
@@ -79,7 +80,3 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
-
-element:
-  homeserver_url: dendrite.example.com
-
